@@ -111,10 +111,10 @@
   gap: 15px;
 }
 
-.bottom-info {
+.main .bottom-info {
   color: #585858;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 300;
   text-align: center;
-  margin-top: 15px auto;
+  margin: 15px auto;
 }
