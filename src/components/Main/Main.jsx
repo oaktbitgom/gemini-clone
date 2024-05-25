@@ -20,30 +20,54 @@ const Main = () => {
         <img src={assets.user_icon} alt="" />
       </div>
       <div className="main-container">
-        <div className="greet">
-          <p>
-            <span>Dev님, 안녕하세요</span>
-          </p>
-          <div>무엇을 도와드릴까요?</div>
-        </div>
-        <div className="cards">
-          <div className="card">
-            <p>기술 발전</p>
-            <img src={assets.compass_icon} alt="" />
+        {!showResult ? (
+          <>
+            <div className="greet">
+              <p>
+                <span>Dev님, 안녕하세요</span>
+              </p>
+              <div>무엇을 도와드릴까요?</div>
+            </div>
+            <div className="cards">
+              <div className="card">
+                <p>기술 발전</p>
+                <img src={assets.compass_icon} alt="" />
+              </div>
+              <div className="card">
+                <p>외국어 문장</p>
+                <img src={assets.bulb_icon} alt="" />
+              </div>
+              <div className="card">
+                <p>언어 학습 계획</p>
+                <img src={assets.message_icon} alt="" />
+              </div>
+              <div className="card">
+                <p>제품의 장단점</p>
+                <img src={assets.code_icon} alt="" />
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="result">
+            <div className="result-title">
+              <img src={assets.user_icon} alt="" />
+              <p>{recentPrompt}</p>
+            </div>
+            <div className="result-data">
+              <img src={assets.gemini_icon} alt="" />
+              {loading ? (
+                <div className="loader">
+                  <hr />
+                  <hr />
+                  <hr />
+                </div>
+              ) : (
+                <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
+              )}
+            </div>
           </div>
-          <div className="card">
-            <p>외국어 문장</p>
-            <img src={assets.bulb_icon} alt="" />
-          </div>
-          <div className="card">
-            <p>언어 학습 계획</p>
-            <img src={assets.message_icon} alt="" />
-          </div>
-          <div className="card">
-            <p>제품의 장단점</p>
-            <img src={assets.code_icon} alt="" />
-          </div>
-        </div>
+        )}
+
         <div className="main-bottom">
           <div className="search-box">
             <input
@@ -51,6 +75,7 @@ const Main = () => {
               value={input}
               type="text"
               placeholder="여기에 프롬프트 입력"
+              onKeyDown={(e) => e.key === "Enter" && onSent()}
             />
             <div>
               <img src={assets.gallery_icon} alt="" />
